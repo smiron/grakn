@@ -1,8 +1,19 @@
 #!/bin/bash
 
-./grakn "$@"
+if [ "$1" != "./grakn" ]; then
+  exec "$@"
+fi
 
-while sleep 60; do
+trap _term SIGTERM
+
+function _term() {
+  echo "GRAKN service stopping"
+  ./grakn server stop
+}
+
+./grakn "${@:2}"
+
+while sleep 1; do
   ps aux |grep grakn |grep -q -v grep
   PROCESS_1_STATUS=$?
   # If the greps above find anything, they exit with 0 status
@@ -14,3 +25,5 @@ while sleep 60; do
 
   echo "GRAKN still running"
 done
+
+echo "GRAKN service stopped"

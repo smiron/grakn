@@ -13,7 +13,8 @@ WORKDIR /opt/grakn-dist-1.1.0
 
 COPY entrypoint.sh .
 RUN chmod +x entrypoint.sh && \
-    chmod +x grakn
+    chmod +x grakn && \
+    chmod +x graql
 
 ENTRYPOINT ["./entrypoint.sh"]
-#CMD ["./grakn", "server", "start"]
+CMD ["./grakn", "server", "start"]
