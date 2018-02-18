@@ -1,0 +1,37 @@
+define
+    LegalEntity sub entity,
+        has name,
+        plays companyEntity;
+    
+    TradingCounterparty sub entity,
+        has name,
+        plays parentCompany;
+
+    Country sub entity,
+        has name,
+        plays location
+        plays currencyIssuer;
+
+    Currency sub entity,
+        has name,
+        plays currency;
+
+name sub attribute, datatype string;
+
+parentOf sub relationship,
+    relates parentCompany, relates companyEntity;
+
+ultimateParentOf sub relationship,
+    relates parentCompany, relates companyEntity;
+
+companyLocation sub relationship,
+    relates companyEntity, relates location;
+
+countryCurrency sub relationship,
+    relates currencyIssuer, relates currency;
+
+parentCompany sub role;
+companyEntity sub role;
+location sub role;
+currency sub role;
+currencyIssuer sub role;

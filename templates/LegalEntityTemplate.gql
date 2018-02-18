@@ -1,0 +1,4 @@
+insert                                                                                                                             
+
+$x isa LegalEntity
+    has name <name>;
